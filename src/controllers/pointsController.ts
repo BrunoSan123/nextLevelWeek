@@ -55,11 +55,14 @@ class PointController{
     
         const point_id =idsIseridos[0]
     
-        const poitItens =items.map((item_id:number) =>{
+        const poitItens =items
+        .split(',')
+        .map((item: String)=>Number(item.trim()))
+        .map((item_id:number) =>{
             return{
                item_id,
                point_id
-            }
+            };
         })
         await trx('point_items').insert(poitItens)
         await trx.commit();
